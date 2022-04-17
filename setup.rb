@@ -105,7 +105,7 @@ def check_all
     if editor.match(/code/i)
       [ true, "VS Code is your default git editor"]
     else
-      [ false, "Ask a teacher to check your ~/.gitconfig editor setup. Right now, it's `#{editor.chomp}`"]
+      [ false, "Ask Ashkan to check your ~/.gitconfig editor setup. Right now, it's `#{editor.chomp}`"]
     end
   end
   check("ruby gems") do
