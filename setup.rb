@@ -4,6 +4,7 @@ require "json"
 REQUIRED_RUBY_VERSION = "3.0.3"
 REQUIRED_GIT_VERSION = "2.0"
 REQUIRED_NODE_VERSION = "17.3.0"
+REQUIRED_POSTGRES_VERSION = "13.6"
 REQUIRED_GEMS = %w[rake rspec rubocop-performance pry-byebug colored http]
 MINIMUM_AVATAR_SIZE = 2 * 1024
 
@@ -66,6 +67,15 @@ def check_all
       [ true, "Your default node version is #{version_tokens.join(".")}"]
     else
       [ false, "Your default node version is outdated: #{version_tokens.join(".")}"]
+    end
+  end
+  check("postgres version") do
+    version_tokens = `postgres --version`.gsub("postgres (PostgreSQL)", "").strip.split(".").map(&:to_i)
+    required_version_tokens = REQUIRED_POSTGRES_VERSION.split(".").map(&:to_i)
+    if version_tokens.first == required_version_tokens.first && version_tokens[1] >= required_version_tokens[1]
+      [ true, "Your default postgres version is #{version_tokens.join(".")}"]
+    else
+      [ false, "Your default postgres version is outdated: #{version_tokens.join(".")}"]
     end
   end
   check("git/Github email matching") do
