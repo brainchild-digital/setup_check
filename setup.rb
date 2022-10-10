@@ -2,6 +2,7 @@ require "io/console"
 require "json"
 
 REQUIRED_RUBY_VERSION = "3.1.2"
+REQUIRED_ASDF_VERSION = "0.10.2"
 REQUIRED_GIT_VERSION = "2.0"
 REQUIRED_NODE_VERSION = "17.3.0"
 REQUIRED_POSTGRES_VERSION = "13.6"
@@ -49,6 +50,15 @@ def check_all
     else
       details = `type -a ruby`
       [ false, "Your default ruby version is #{RUBY_VERSION}, but should be #{REQUIRED_RUBY_VERSION}. Did you run `rbenv global #{REQUIRED_RUBY_VERSION}`?\n#{details}---" ]
+    end
+  end
+  check("node version") do
+    version_tokens = `asdf --version`.gsub("v", "").strip.split(".").map(&:to_i)
+    required_version_tokens = REQUIRED_ASDF_VERSION.split(".").map(&:to_i)
+    if version_tokens.first == required_version_tokens.first && version_tokens[1] >= required_version_tokens[1]
+      [ true, "Your default asdf version is #{version_tokens.join(".")}"]
+    else
+      [ false, "Your default asdf version is outdated: #{version_tokens.join(".")}"]
     end
   end
   check("git version") do
