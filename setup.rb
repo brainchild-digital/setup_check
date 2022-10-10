@@ -1,7 +1,7 @@
 require "io/console"
 require "json"
 
-REQUIRED_RUBY_VERSION = "3.0.3"
+REQUIRED_RUBY_VERSION = "3.1.2"
 REQUIRED_GIT_VERSION = "2.0"
 REQUIRED_NODE_VERSION = "17.3.0"
 REQUIRED_POSTGRES_VERSION = "13.6"
@@ -15,7 +15,7 @@ REQUIRED_GEMS.each do |the_gem|
     puts "⚠️  The gem '#{the_gem}' is missing."
 
     puts "1️⃣ Please run `gem uninstall -qxaI #{REQUIRED_GEMS.join(" ")} rails`"
-    puts "2️⃣ Then run `gem install #{REQUIRED_GEMS.join(" ")} 'rails:~>6.1'`"
+    puts "2️⃣ Then run `gem install #{REQUIRED_GEMS.join(" ")} 'rails:~>7.0.4'`"
     puts "3️⃣ Then retry this check!"
     exit 1
   end
