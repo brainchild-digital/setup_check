@@ -52,7 +52,7 @@ def check_all
       [ false, "Your default ruby version is #{RUBY_VERSION}, but should be #{REQUIRED_RUBY_VERSION}. Did you run `rbenv global #{REQUIRED_RUBY_VERSION}`?\n#{details}---" ]
     end
   end
-  check("node version") do
+  check("asdf version") do
     version_tokens = `asdf --version`.gsub("v", "").strip.split(".").map(&:to_i)
     required_version_tokens = REQUIRED_ASDF_VERSION.split(".").map(&:to_i)
     if version_tokens.first == required_version_tokens.first && version_tokens[1] >= required_version_tokens[1]
